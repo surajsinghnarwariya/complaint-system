@@ -92,6 +92,7 @@ function Navbar() {
                   borderRadius: "50%",
                   border: "2px solid white"
                 }}
+                alt="profile"
               />
 
               <p style={{ color: "white", fontSize: "12px" }}>

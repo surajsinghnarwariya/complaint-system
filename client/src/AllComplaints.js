@@ -73,6 +73,7 @@ function AllComplaints() {
                     key={i}
                     src={`http://127.0.0.1:5000/uploads/${img}`}
                     style={{ width: "80px", margin: "5px" }}
+                    alt="complaint"
                   />
                 ))}
 
