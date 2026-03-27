@@ -9,7 +9,7 @@ function MainPage() {
 
   const fetchComplaints = async () => {
     try {
-      await axios.get("http://127.0.0.1:5000/complaints");
+      await axios.get("https://complaint-api-itkm.onrender.com");
     } catch (err) {
       console.log("FETCH ERROR", err);
     }
