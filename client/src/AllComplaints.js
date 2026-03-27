@@ -16,7 +16,7 @@ function AllComplaints() {
 
   const fetchComplaints = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:5000/complaints");
+      const res = await axios.get("https://your-backend.onrender.com/complaints");
       setComplaints(res.data);
     } catch (err) {
       console.log(err);
@@ -24,7 +24,7 @@ function AllComplaints() {
   };
 
   const handleStatus = async (id) => {
-    await axios.put(`http://localhost:5000/complaint/${id}`, {
+    await axios.put(`https://your-backend.onrender.com/complaint/${id}`, {
       status: "Resolved"
     });
     fetchComplaints();
@@ -83,7 +83,7 @@ function AllComplaints() {
                 item.images.map((img, i) => (
                   <img
                     key={i}
-                    src={`http://127.0.0.1:5000/uploads/${img}`}
+                    src={`https://your-backend.onrender.com/uploads/${img}`}
                     alt="complaint"
                     style={{
                       width: "80px",
