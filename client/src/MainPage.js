@@ -76,7 +76,7 @@ function MainPage() {
         formData.append("images", images[i]);
       }
 
-      await axios.post("http://127.0.0.1:5000/complaint", formData);
+      await axios.post("https://complaint-api-itkm.onrender.com", formData);
 
       alert("Complaint Submitted ✅");
 

@@ -16,7 +16,7 @@ function AllComplaints() {
 
   const fetchComplaints = async () => {
     try {
-      const res = await axios.get("https://your-backend.onrender.com/complaints");
+      const res = await axios.get("https://complaint-api-itkm.onrender.com");
       setComplaints(res.data);
     } catch (err) {
       console.log(err);
@@ -24,7 +24,7 @@ function AllComplaints() {
   };
 
   const handleStatus = async (id) => {
-    await axios.put(`https://your-backend.onrender.com/complaint/${id}`, {
+    await axios.put(`hhttps://complaint-api-itkm.onrender.com/${id}`, {
       status: "Resolved"
     });
     fetchComplaints();
@@ -83,7 +83,7 @@ function AllComplaints() {
                 item.images.map((img, i) => (
                   <img
                     key={i}
-                    src={`https://your-backend.onrender.com/uploads/${img}`}
+                    src={`https://complaint-api-itkm.onrender.com/${img}`}
                     alt="complaint"
                     style={{
                       width: "80px",
