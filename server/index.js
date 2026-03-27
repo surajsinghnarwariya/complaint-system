@@ -25,16 +25,16 @@ const upload = multer({ storage });
 //MongoDB connect
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb+srv://suraj:<suraj@123>@cluster0.xzlmddu.mongodb.net/?appName=Cluster0")
+mongoose.connect("mongodb+srv://suraj:suraj%40123@cluster0.xzlmddu.mongodb.net/complaintsDB")
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
 // Middleware
 app.use(cors({
-  origin: "http://localhost:3001",
-  credentials: true
+  origin: "*"
 }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
@@ -50,9 +50,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(new GoogleStrategy({
-  clientID: "663478212675-5711of8p9fduppnge9ql3dt18luffh12.apps.googleusercontent.com",
   clientID: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET
+  clientSecret: process.env.CLIENT_SECRET,
+  callbackURL: "https://complaint-api-itkm.onrender.com/auth/google/callback"
 },
   (accessToken, refreshToken, profile, done) => {
     return done(null, profile);
@@ -213,7 +213,7 @@ app.get("/auth/google",
 app.get("/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
-    res.redirect("http://localhost:3000");
+    res.redirect("https://your-vercel-app.vercel.app");
   }
 );
 
