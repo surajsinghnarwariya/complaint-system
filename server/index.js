@@ -1,6 +1,8 @@
 require("dotenv").config();
+
 const Complaint = require("./models/Complaint");
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
 
 const passport = require("passport");
@@ -11,6 +13,7 @@ const multer = require("multer");
 const path = require("path");
 
 const app = express();
+const port = process.env.PORT || 4000
 
 const fs = require("fs");
 
@@ -29,18 +32,15 @@ const storage = multer.diskStorage({
   }
 });
 
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log(err));
+// mongoose.connect(process.env.MONGO_URI)
+//   .then(() => console.log("MongoDB Connected"))
+//   .catch(err => console.log(err));
+
+app.get("/", (req, res) => {
+  res.send("Server running without DB ✅");
+});
 
 const upload = multer({ storage });
-
-//MongoDB connect
-const mongoose = require("mongoose");
-
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log(err));
 
 // Middleware
 app.use(cors({
@@ -48,6 +48,11 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+//MongoDB connect
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
