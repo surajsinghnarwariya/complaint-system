@@ -13,7 +13,6 @@ const multer = require("multer");
 const path = require("path");
 
 const app = express();
-const port = process.env.PORT || 4000
 
 const fs = require("fs");
 
@@ -36,13 +35,6 @@ const storage = multer.diskStorage({
 //   .then(() => console.log("MongoDB Connected"))
 //   .catch(err => console.log(err));
 
-app.get("/", (req, res) => {
-  res.send("Server running without DB ✅");
-});
-
-app.get("/", (req, res) => {
-  res.send("Server is running 🚀");
-});
 
 const upload = multer({ storage });
 
@@ -53,7 +45,7 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//MongoDB connect
+// MongoDB connect
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
