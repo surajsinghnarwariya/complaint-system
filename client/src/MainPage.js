@@ -9,7 +9,7 @@ function MainPage() {
 
   const fetchComplaints = async () => {
     try {
-      await axios.get("https://complaint-api-itkm.onrender.com");
+      await axios.get("https://complaint-api-itkm.onrender.com/complaints");
     } catch (err) {
       console.log("FETCH ERROR", err);
     }
@@ -76,7 +76,7 @@ function MainPage() {
         formData.append("images", images[i]);
       }
 
-      await axios.post("https://complaint-api-itkm.onrender.com", formData);
+      await axios.post("https://complaint-api-itkm.onrender.com/complaint", formData);
 
       alert("Complaint Submitted ✅");
 
