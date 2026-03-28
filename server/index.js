@@ -46,6 +46,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // MongoDB connect
+mongoose.connection.on("connected", () => {
+  console.log("✅ MongoDB Connected");
+});
+
+mongoose.connection.on("error", (err) => {
+  console.log("❌ MongoDB Error:", err);
+});
+
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
@@ -118,6 +126,10 @@ app.post("/complaint", upload.array("images", 5), async (req, res) => {
 
 app.get("/complaints", async (req, res) => {
   try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(500).json({ message: "MongoDB not connected ❌" });
+    }
+
     const data = await Complaint.find();
     res.json(data);
   } catch (err) {
