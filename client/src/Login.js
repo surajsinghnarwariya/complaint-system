@@ -10,7 +10,7 @@ function Login() {
   // Send OTP
   const sendOtp = async () => {
     try {
-      await axios.post("http://localhost:5000/send-otp", { mobile });
+      await axios.post("https://complaint-api-itkm.onrender.com/send-otp", { mobile });
       alert("OTP Sent 📱");
       setIsOtpSent(true);
     } catch {
@@ -21,7 +21,7 @@ function Login() {
   // Verify OTP
   const verifyOtp = async () => {
     try {
-      await axios.post("http://localhost:5000/verify-otp", {
+      await axios.post("https://complaint-api-itkm.onrender.com/verify-otp", {
         mobile,
         otp
       });
