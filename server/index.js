@@ -67,14 +67,14 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new GoogleStrategy({
-  clientID: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
-  callbackURL: "https://complaint-api-itkm.onrender.com/auth/google/callback"
-},
-  (accessToken, refreshToken, profile, done) => {
-    return done(null, profile);
-  }));
+// passport.use(new GoogleStrategy({
+//   clientID: process.env.CLIENT_ID,
+//   clientSecret: process.env.CLIENT_SECRET,
+//   callbackURL: "https://complaint-api-itkm.onrender.com/auth/google/callback"
+// },
+//   (accessToken, refreshToken, profile, done) => {
+//     return done(null, profile);
+//   }));
 
 passport.serializeUser((user, done) => {
   done(null, user);
