@@ -7,31 +7,47 @@ function Login() {
   const [otp, setOtp] = useState("");
   const [isOtpSent, setIsOtpSent] = useState(false);
 
-  // Send OTP
+  // ✅ Send OTP
   const sendOtp = async () => {
     try {
-      await axios.post("https://complaint-api-itkm.onrender.com/send-otp", { mobile });
-      alert("OTP Sent 📱");
+      if (!mobile || mobile.length !== 10) {
+        alert("Enter valid mobile number ❌");
+        return;
+      }
+
+      const res = await axios.post(
+        "https://complaint-api-itkm.onrender.com/send-otp",
+        { mobile }
+      );
+
+      console.log("OTP RESPONSE 👉", res.data);
+
+      alert("OTP Sent 📱 (check Render logs)");
       setIsOtpSent(true);
-    } catch {
-      alert("Error sending OTP");
+
+    } catch (err) {
+      console.log("SEND OTP ERROR 👉", err.response?.data || err.message);
+      alert("Error sending OTP ❌");
     }
   };
 
-  // Verify OTP
+  // ✅ Verify OTP
   const verifyOtp = async () => {
     try {
-      await axios.post("https://complaint-api-itkm.onrender.com/verify-otp", {
-        mobile,
-        otp
-      });
-      localStorage.setItem("isAdmin", "true");
+      const res = await axios.post(
+        "https://complaint-api-itkm.onrender.com/verify-otp",
+        { mobile, otp }
+      );
+
+      console.log("VERIFY RESPONSE 👉", res.data);
+
+      // Admin check
       if (mobile === "7354227898") {
         localStorage.setItem("isAdmin", "true");
       } else {
         localStorage.setItem("isAdmin", "false");
       }
-      localStorage.setItem("userName", mobile);
+
       let name = localStorage.getItem("name");
 
       if (!name) {
@@ -40,9 +56,12 @@ function Login() {
       }
 
       localStorage.setItem("userName", name);
+
       alert("Login Successful ✅");
       window.location.href = "/";
-    } catch {
+
+    } catch (err) {
+      console.log("VERIFY ERROR 👉", err.response?.data || err.message);
       alert("Invalid OTP ❌");
     }
   };
@@ -70,9 +89,14 @@ function Login() {
             🔐 Login
           </h2>
 
-          {/* Google Login */}
+          {/* ✅ Google Login FIXED */}
           <button
-            onClick={() => window.open("http://localhost:5000/auth/google", "_self")}
+            onClick={() =>
+              window.open(
+                "https://complaint-api-itkm.onrender.com/auth/google",
+                "_self"
+              )
+            }
             style={{
               width: "100%",
               padding: "10px",
