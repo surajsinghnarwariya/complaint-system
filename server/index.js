@@ -40,6 +40,10 @@ app.get("/", (req, res) => {
   res.send("Server running without DB ✅");
 });
 
+app.get("/", (req, res) => {
+  res.send("Server is running 🚀");
+});
+
 const upload = multer({ storage });
 
 // Middleware
