@@ -1,11 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom"; 
 
 function Login() {
   const [mobile, setMobile] = useState("");
   const [otp, setOtp] = useState("");
   const [isOtpSent, setIsOtpSent] = useState(false);
+
+  const navigate = useNavigate(); 
 
   // ✅ Send OTP
   const sendOtp = async () => {
@@ -41,7 +44,6 @@ function Login() {
 
       console.log("VERIFY RESPONSE 👉", res.data);
 
-      // Admin check
       if (mobile === "7354227898") {
         localStorage.setItem("isAdmin", "true");
       } else {
@@ -58,7 +60,8 @@ function Login() {
       localStorage.setItem("userName", name);
 
       alert("Login Successful ✅");
-      window.location.href = "/";
+
+      navigate("/"); 
 
     } catch (err) {
       console.log("VERIFY ERROR 👉", err.response?.data || err.message);
@@ -89,7 +92,6 @@ function Login() {
             🔐 Login
           </h2>
 
-          {/* ✅ Google Login FIXED */}
           <button
             onClick={() =>
               window.open(
