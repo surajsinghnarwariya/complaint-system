@@ -75,7 +75,7 @@ function Login() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "linear-gradient(135deg, #667eea, #764ba2)"
+        background: "linear-gradient(135deg, #e4a442, #4df158)"
       }}>
         <div style={{
           background: "white",
