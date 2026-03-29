@@ -232,7 +232,10 @@ app.post("/verify-otp", async (req, res) => {
 
 // Google Login
 app.get("/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+    session: false
+  })
 );
 
 // Callback
