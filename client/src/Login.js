@@ -1,14 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [mobile, setMobile] = useState("");
   const [otp, setOtp] = useState("");
   const [isOtpSent, setIsOtpSent] = useState(false);
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   // ✅ Send OTP
   const sendOtp = async () => {
@@ -61,7 +61,7 @@ function Login() {
 
       alert("Login Successful ✅");
 
-      navigate("/"); 
+      navigate("/");
 
     } catch (err) {
       console.log("VERIFY ERROR 👉", err.response?.data || err.message);
@@ -94,10 +94,7 @@ function Login() {
 
           <button
             onClick={() =>
-              window.open(
-                "https://complaint-api-itkm.onrender.com/auth/google",
-                "_self"
-              )
+              window.location.href = "https://complaint-api-itkm.onrender.com/auth/google?force=123"
             }
             style={{
               width: "100%",
