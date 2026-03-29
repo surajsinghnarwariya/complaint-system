@@ -93,9 +93,11 @@ function Login() {
           </h2>
 
           <button
-            onClick={() =>
-              window.location.href = "https://complaint-api-itkm.onrender.com/auth/google?force=123"
-            }
+            onClick={() => {
+              window.location.assign(
+                "https://complaint-api-itkm.onrender.com/auth/google"
+              );
+            }}
             style={{
               width: "100%",
               padding: "10px",
